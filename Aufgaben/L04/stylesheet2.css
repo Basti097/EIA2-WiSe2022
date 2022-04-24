@@ -3,7 +3,7 @@ header {
     width: 100%;
     height: 380px;
     background-repeat: no-repeat;
-    background-size:auto;
+    background-size:cover;
 }
 footer {
     background-color: #eaeaea
