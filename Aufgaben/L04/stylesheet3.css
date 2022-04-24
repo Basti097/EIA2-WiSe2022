@@ -106,7 +106,7 @@ a:hover, a:focus, a:active {
     bottom: 0;
     
 
-    text-align:left;
+    text-align:center;
      
     font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
     
@@ -148,6 +148,8 @@ button {
     color: white;
     border: 2px solid darkgray;
     font-size: 15px;
+
+    
 
 }
 
