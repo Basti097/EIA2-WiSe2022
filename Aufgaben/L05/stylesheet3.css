@@ -235,6 +235,7 @@ textarea {
     height:50px;
     width:50px;
     opacity: 0.5;
+    transition: 0.5s;
 }
 
 .social:hover {

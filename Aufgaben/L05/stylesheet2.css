@@ -150,6 +150,7 @@ a:hover, a:focus, a:active {
 }
 
 .social:hover {
+    transition: 0.5s;
     opacity: 1;
 }
 
