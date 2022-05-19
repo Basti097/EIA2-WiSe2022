@@ -17,6 +17,7 @@ button {
     border-color: black;
     border-radius: 10px;
 }
+
 .but0 {
     background-color: #104E8B;
 }
@@ -51,6 +52,12 @@ button {
 
 .but8 {
     background-color: #00BFFF;
+}
+
+.play:hover {
+    transform: scale(1.05);
+    transition: 0.4s;
+
 }
 
 .container_buttons_row1 {
