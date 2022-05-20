@@ -23,6 +23,7 @@ var playAr = [new Audio("./DrumPad/kick.mp3"),
     new Audio("./DrumPad/snare.mp3"),
     new Audio("./DrumPad/laugh-1.mp3")];
 //globale Variablen 
+var interval;
 var Counter;
 var CounterPlay = 0;
 var keypressed;
@@ -47,13 +48,16 @@ function playsample() {
 }
 //Endlos Intervall für das Array der Playlist 
 function playplaylist() {
-    setInterval(playplaylist2, 1000);
+    interval = setInterval(playplaylist2, 500);
 }
 //Spielt die Playlist (Array) ab 
 function playplaylist2() {
     playAr[CounterPlay].play();
     CounterPlay++;
     console.log(CounterPlay);
+    if (CounterPlay == playAr.length) {
+        clearInterval(interval);
+    }
 }
 //Welche Taste wird gedrückt
 function whichkey(e) {
