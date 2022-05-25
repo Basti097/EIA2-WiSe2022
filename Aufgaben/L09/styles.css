@@ -1,5 +1,27 @@
 body {
-    background-color:black;
+    background-color:black; 
+}
+#mix {
+    color: white;
+}
+#mix:hover {
+    transform: scale(1.05);
+    transition: 0.4s;
+
+}
+
+
+#play {
+    color: white;
+    position: relative;
+    
+    
+    
+}
+
+i {
+    margin: 8px;
+    
 }
 
 .container_play {
@@ -63,7 +85,7 @@ button:hover {
     background-color: #00BFFF;
 }
 
-.play:hover {
+#play:hover {
     transform: scale(1.05);
     transition: 0.4s;
 
