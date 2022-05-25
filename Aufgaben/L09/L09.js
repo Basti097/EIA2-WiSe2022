@@ -14,8 +14,10 @@ var interval;
 var index = 0;
 var playIndex = false;
 var state = 0;
+var stateMix = 0;
 var index2;
 var clickCounter = 0;
+var clickCounterMix = 0;
 var randomIndex = false;
 //Event Listener
 window.addEventListener('load', function () {
@@ -41,14 +43,17 @@ function mainfunction() {
     if (playIndex == true) {
         index++;
     }
-    if (index == sound.length) {
+    if (index == 9) {
         index = 0;
     }
     if (clickCounter == 2) {
         sound[index].pause();
         clickCounter = 0;
-        clearInterval(interval);
         index = 0;
+    }
+    if (clickCounterMix == 2) {
+        sound[index].pause();
+        clickCounterMix = 0;
     }
 }
 //Welcher Button wird gedrückt
@@ -71,19 +76,26 @@ function player() {
         document.getElementById("play").classList.remove("fa-stop");
         document.getElementById("play").classList.add("fa-play");
         state = 0;
+        clearInterval(interval);
     }
 }
 // Funktion Random Mix -> ruft Hauptfunktion auf und gibt Zustand weiter
 function randomMix() {
-    clickCounter++;
-    document.getElementById("play").classList.remove("fa-play");
-    document.getElementById("play").classList.add("fa-stop");
-    interval = setInterval(mainfunction, 500);
+    clickCounterMix++;
     randomIndex = true;
-    if (clickCounter == 2) {
-        sound[index].pause();
-        clearInterval(interval);
+    if (stateMix == 0) {
+        document.getElementById("mix").classList.remove("fa-shuffle");
+        document.getElementById("mix").classList.add("fa-stop");
+        stateMix = 1;
+        interval = setInterval(mainfunction, 500);
     }
-    mainfunction();
+    else {
+        document.getElementById("mix").classList.remove("fa-stop");
+        document.getElementById("mix").classList.add("fa-shuffle");
+        stateMix = 0;
+        clearInterval(interval);
+        index = 0;
+        randomIndex = false;
+    }
 }
 //# sourceMappingURL=L09.js.map
