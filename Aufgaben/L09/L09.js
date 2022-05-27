@@ -30,6 +30,7 @@ window.addEventListener('load', function () {
     document.querySelector(".but6").addEventListener('click', getButtonId);
     document.querySelector(".but7").addEventListener('click', getButtonId);
     document.querySelector(".but8").addEventListener('click', getButtonId);
+    document.querySelector("#record").addEventListener('click', addSample);
     document.querySelector("#play").addEventListener('click', player);
     document.querySelector("#mix").addEventListener('click', randomMix);
 });
@@ -59,6 +60,7 @@ function mainfunction() {
 //Welcher Button wird gedrückt
 function getButtonId() {
     index2 = document.querySelector("button:hover").getAttribute("id");
+    sound.push(index2);
     index = index2;
     mainfunction();
 }

@@ -32,9 +32,21 @@ window.addEventListener('load', function () {
   document.querySelector(".but6").addEventListener('click', getButtonId);
   document.querySelector(".but7").addEventListener('click', getButtonId);
   document.querySelector(".but8").addEventListener('click', getButtonId);
+  document.querySelector("#record").addEventListener('click', addSample);
   document.querySelector("#play").addEventListener('click', player);
   document.querySelector("#mix").addEventListener('click', randomMix);
 })
+
+
+//füge dem Array ein Sample hinzu
+function addSample() {
+  index2 = document.querySelector("button:hover").getAttribute("id");
+  sound.push(index2);
+  playIndex = true;
+  mainfunction()
+
+
+}
 
 //Zentralfunktion Sound abspielen
 function mainfunction() {
@@ -42,16 +54,12 @@ function mainfunction() {
   console.log(index);
   sound[index].play();
   
-
   if (randomIndex == true) {
     index = Math.floor(Math.random() * 8);
-
-    
   }
 
   if (playIndex == true) {
     index++;
-
   }
 
   if (index == 9) {
@@ -67,8 +75,6 @@ function mainfunction() {
   if (clickCounterMix == 2) {
     sound[index].pause();
     clickCounterMix = 0;
-    
-    
   }
 }
 
@@ -84,13 +90,11 @@ function player() {
   clickCounter++
   playIndex = true;
 
-
   if (state == 0) {
     document.getElementById("play").classList.remove("fa-play");
     document.getElementById("play").classList.add("fa-stop");
     state = 1;
     interval = setInterval(mainfunction, 500);
-
   }
 
   else {
@@ -105,12 +109,12 @@ function player() {
 function randomMix() {
   clickCounterMix++
   randomIndex = true;
+
   if (stateMix == 0) {
     document.getElementById("mix").classList.remove("fa-shuffle");
     document.getElementById("mix").classList.add("fa-stop");
     stateMix = 1;
     interval = setInterval(mainfunction, 500);
-
   }
 
   else {
@@ -121,9 +125,13 @@ function randomMix() {
     index=0;
     randomIndex= false;
   }
-  
 
+
+  
 }
+
+
+
 
 
 

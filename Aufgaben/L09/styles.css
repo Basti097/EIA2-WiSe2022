@@ -7,21 +7,25 @@ body {
 #mix:hover {
     transform: scale(1.05);
     transition: 0.4s;
-
 }
 
+#record {
+    color: white; 
+    
+}
+
+#record:hover {
+    transform: scale(1.05);
+    transition: 0.4s;
+}
 
 #play {
     color: white;
-    position: relative;
-    
-    
-    
+    position: relative;    
 }
 
 i {
-    margin: 8px;
-    
+    margin: 8px;  
 }
 
 .container_play {
