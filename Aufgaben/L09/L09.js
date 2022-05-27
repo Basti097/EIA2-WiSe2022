@@ -20,19 +20,18 @@ var clickCounter = 0;
 var clickCounterMix = 0;
 var randomIndex = false;
 //Event Listener
-window.addEventListener('load', function () {
-    document.querySelector(".but0").addEventListener('click', getButtonId);
-    document.querySelector(".but1").addEventListener('click', getButtonId);
-    document.querySelector(".but2").addEventListener('click', getButtonId);
-    document.querySelector(".but3").addEventListener('click', getButtonId);
-    document.querySelector(".but4").addEventListener('click', getButtonId);
-    document.querySelector(".but5").addEventListener('click', getButtonId);
-    document.querySelector(".but6").addEventListener('click', getButtonId);
-    document.querySelector(".but7").addEventListener('click', getButtonId);
-    document.querySelector(".but8").addEventListener('click', getButtonId);
-    document.querySelector("#record").addEventListener('click', addSample);
-    document.querySelector("#play").addEventListener('click', player);
-    document.querySelector("#mix").addEventListener('click', randomMix);
+window.addEventListener("load", function () {
+    document.querySelector(".but0").addEventListener("click", getButtonId);
+    document.querySelector(".but1").addEventListener("click", getButtonId);
+    document.querySelector(".but2").addEventListener("click", getButtonId);
+    document.querySelector(".but3").addEventListener("click", getButtonId);
+    document.querySelector(".but4").addEventListener("click", getButtonId);
+    document.querySelector(".but5").addEventListener("click", getButtonId);
+    document.querySelector(".but6").addEventListener("click", getButtonId);
+    document.querySelector(".but7").addEventListener("click", getButtonId);
+    document.querySelector(".but8").addEventListener("click", getButtonId);
+    document.querySelector("#play").addEventListener("click", player);
+    document.querySelector("#mix").addEventListener("click", randomMix);
 });
 //Zentralfunktion Sound abspielen
 function mainfunction() {
@@ -59,9 +58,7 @@ function mainfunction() {
 }
 //Welcher Button wird gedrückt
 function getButtonId() {
-    index2 = document.querySelector("button:hover").getAttribute("id");
-    sound.push(index2);
-    index = index2;
+    index = parseFloat(document.querySelector("button:hover").getAttribute("id"));
     mainfunction();
 }
 //Ändert das Play Icon je nach Klick + aktiviert die Mainfunktion mit dem Zähler

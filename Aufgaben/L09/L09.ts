@@ -11,49 +11,38 @@ new Audio("./DrumPad/laugh-2.mp3"),
 new Audio("")];
 
 //globale Variablen 
-var interval;
+var interval: number;
 var index: number = 0;
 var playIndex: boolean = false;
 var state: number = 0;
 var stateMix: number = 0;
-var index2;
+var index2: number;
 var clickCounter: number = 0;
 var clickCounterMix: number = 0;
 var randomIndex: boolean = false;
 
 //Event Listener
-window.addEventListener('load', function () {
-  document.querySelector(".but0").addEventListener('click', getButtonId);
-  document.querySelector(".but1").addEventListener('click', getButtonId);
-  document.querySelector(".but2").addEventListener('click', getButtonId);
-  document.querySelector(".but3").addEventListener('click', getButtonId);
-  document.querySelector(".but4").addEventListener('click', getButtonId);
-  document.querySelector(".but5").addEventListener('click', getButtonId);
-  document.querySelector(".but6").addEventListener('click', getButtonId);
-  document.querySelector(".but7").addEventListener('click', getButtonId);
-  document.querySelector(".but8").addEventListener('click', getButtonId);
-  document.querySelector("#record").addEventListener('click', addSample);
-  document.querySelector("#play").addEventListener('click', player);
-  document.querySelector("#mix").addEventListener('click', randomMix);
-})
+window.addEventListener("load", function (): void {
+  document.querySelector(".but0").addEventListener("click", getButtonId);
+  document.querySelector(".but1").addEventListener("click", getButtonId);
+  document.querySelector(".but2").addEventListener("click", getButtonId);
+  document.querySelector(".but3").addEventListener("click", getButtonId);
+  document.querySelector(".but4").addEventListener("click", getButtonId);
+  document.querySelector(".but5").addEventListener("click", getButtonId);
+  document.querySelector(".but6").addEventListener("click", getButtonId);
+  document.querySelector(".but7").addEventListener("click", getButtonId);
+  document.querySelector(".but8").addEventListener("click", getButtonId);
+  document.querySelector("#play").addEventListener("click", player);
+  document.querySelector("#mix").addEventListener("click", randomMix);
+});
 
-
-//füge dem Array ein Sample hinzu
-function addSample() {
-  index2 = document.querySelector("button:hover").getAttribute("id");
-  sound.push(index2);
-  playIndex = true;
-  mainfunction()
-
-
-}
 
 //Zentralfunktion Sound abspielen
-function mainfunction() {
-  
+function mainfunction(): void {
+
   console.log(index);
   sound[index].play();
-  
+
   if (randomIndex == true) {
     index = Math.floor(Math.random() * 8);
   }
@@ -68,7 +57,7 @@ function mainfunction() {
 
   if (clickCounter == 2) {
     sound[index].pause();
-    clickCounter = 0
+    clickCounter = 0;
     index = 0;
   }
 
@@ -78,16 +67,17 @@ function mainfunction() {
   }
 }
 
+
+
 //Welcher Button wird gedrückt
-function getButtonId() {
-  index2 = document.querySelector("button:hover").getAttribute("id");
-  index = index2;
+function getButtonId(): void {
+  index = parseFloat(document.querySelector("button:hover").getAttribute("id"));
   mainfunction();
 }
 
 //Ändert das Play Icon je nach Klick + aktiviert die Mainfunktion mit dem Zähler
-function player() {
-  clickCounter++
+function player(): void {
+  clickCounter++;
   playIndex = true;
 
   if (state == 0) {
@@ -106,8 +96,8 @@ function player() {
 }
 
 // Funktion Random Mix -> ruft Hauptfunktion auf und gibt Zustand weiter
-function randomMix() {
-  clickCounterMix++
+function randomMix(): void {
+  clickCounterMix++;
   randomIndex = true;
 
   if (stateMix == 0) {
@@ -122,12 +112,12 @@ function randomMix() {
     document.getElementById("mix").classList.add("fa-shuffle");
     stateMix = 0;
     clearInterval(interval);
-    index=0;
-    randomIndex= false;
+    index = 0;
+    randomIndex = false;
   }
 
 
-  
+
 }
 
 
