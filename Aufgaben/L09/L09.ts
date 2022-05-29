@@ -42,24 +42,29 @@ function mainfunction(): void {
   console.log(index);
   sound[index].play();
 
+//remix button gedrückt == true
   if (randomIndex == true) {
     index = Math.floor(Math.random() * 8);
   }
 
+//play button gedrückt == true
   if (playIndex == true) {
     index++;
   }
 
+//wenn der index auf 9 ist -> spiele Array von vorne ab
   if (index == 9) {
     index = 0;
   }
 
+//wenn stop button bei play gedrückt ist -> stoppe sound.play
   if (clickCounter == 2) {
     sound[index].pause();
     clickCounter = 0;
     index = 0;
   }
 
+//wenn stop button bei remix gedrückt ist -> stoppe sound.play
   if (clickCounterMix == 2) {
     sound[index].pause();
     clickCounterMix = 0;
