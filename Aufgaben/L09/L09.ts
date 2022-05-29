@@ -16,7 +16,6 @@ var index: number = 0;
 var playIndex: boolean = false;
 var state: number = 0;
 var stateMix: number = 0;
-var index2: number;
 var clickCounter: number = 0;
 var clickCounterMix: number = 0;
 var randomIndex: boolean = false;
