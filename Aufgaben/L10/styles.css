@@ -1,0 +1,120 @@
+
+body {
+    background-color: #fbf8ff;
+    opacity: 0.6;
+}
+
+main {
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#open {
+    color: grey;
+}
+
+
+#totalTasks {
+    color: grey;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container_main {
+    position: relative;
+}
+
+#inputTodo {
+    background: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    padding: 20px 50px;
+    border: none;
+    width: 100%;
+    height: 64px;
+    box-sizing: border-box;
+    border-bottom: 1px solid grey;
+    outline: none;
+}
+
+#addButton:hover {
+    color: black;
+}
+
+#tasks {
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.42);
+}
+
+.trash {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    color: grey;
+    cursor: pointer;
+}
+
+.todo {
+    text-align: left;
+    position: relative;
+    font-size: 20px;
+    padding: 20px 50px;
+    background: white;
+    border-bottom: 1px solid grey;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.check {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    border: 1px solid rgb(189, 189, 189);
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+}
+.check i {
+    position: relative;
+    left: 5px;
+    top: 5px;
+}
+.check.false i {
+    display: none;
+}
+
+.trash:hover {
+    color: black;
+}
+
+#clear {
+    margin-top: 20px;
+}
+#clear:hover {
+    cursor: pointer;
+}
+
+h1 {
+    text-align: center;
+    font-size: 100px;
+    font-weight: normal;
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    margin:auto;
+
+}
+
+#done {
+    color: grey;
+}
+
+#addButton {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    outline: none;
+    color: grey;
+    cursor: pointer;
+
+}

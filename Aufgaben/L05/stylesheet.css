@@ -149,7 +149,7 @@ a:hover, a:focus, a:active {
     position: relative;
     top: 0;
     bottom: 0;
-    /* border: black solid;  */
+    border: black solid;
     
 }
 
