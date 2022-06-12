@@ -19,7 +19,7 @@ window.addEventListener("load", function (): void {
         newTask(inputDOM.value);
     });
 
-
+    
     refreshDOM();
 });
 
