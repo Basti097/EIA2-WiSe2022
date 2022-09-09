@@ -1,0 +1,186 @@
+/* stylet den hauptcontainer mit border, border radius etc. */
+.container_main {
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 375px;
+height: 667px;
+border: black solid; 
+justify-content: center;
+margin: auto;
+background-repeat: no-repeat;
+border: black solid;
+border-radius:25px;
+background-color: lightgray;
+}
+
+/* stylet die klickbaren buttons */
+button {
+    font-family: 'Montserrat', sans-serif;
+    margin: 10px;
+    height: 30px;
+    width: 280px;
+}
+
+/* stylet den footer */
+footer {
+    position: absolute;
+    top: 633px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* stylet die klasse footer die im footer liegt */
+#footer {
+font-family: 'Montserrat', sans-serif;
+}
+
+/* stylet den deutschen satz */
+#deutsch {
+    position: relative;
+    left: 10px;
+    background-color: gray;
+    height: 40px;
+    width: 280px ;
+    text-align: center;
+    padding-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* stylet die übersetzt fläche */
+#uebersetzt {
+    position: relative;
+    left: 10px;
+    background-color: gray;
+    height: 40px;
+    width: 280px;
+    text-align: center;
+    padding-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    
+}
+
+/* stylet den container in die die Buttons generiert werden */
+#container_buttons {
+    display: flex;
+    position: relative;
+    flex-direction:column;
+}
+
+/* stylet die punkte anzeige */
+#points {
+    background-color: white;
+    position: relative;
+    border-radius: 25px;
+    height: 40px;
+    width: 280px ;
+    text-align: center;
+    padding-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+/* stylet die einzelnen Wörter */
+.woerter {
+    height: 30px;
+    width: 280px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 25px;
+    text-align: center;
+    padding-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+/* stylet den hover effekt auf den Wörtern */
+.woerter:hover {
+    transform: scale(1.2);
+    transition: 0.3s;
+}
+
+/* hover effekt der erzeugten Schwierigkeitsstufe */
+.diffs:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+/* stylet die erste Schwierigkeitsstufe */
+#dif0 {
+    height: 30px;
+    width: 280px;
+    margin: 10px;
+    background-color: lightgreen;
+    text-align: center;
+    padding-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+/* stylet die zweite Schwierigkeitsstufe */
+#dif1 {
+    height: 30px;
+    width: 280px;
+    margin: 10px;
+    background-color: yellow;
+    text-align: center;
+    padding-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+/* stylet die dritte Schwierigkeitsstufe */
+#dif2 {
+    height: 30px;
+    width: 280px;
+    margin: 10px;
+    background-color: lightcoral;
+    text-align: center;
+    padding-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+/* stylet die Fläche der Gesamtpunktzahl die am Ende generiert wird */
+.gesamtPunktzahl {
+    height: 30px;
+    width: 280px;
+    margin: 10px;
+    background-color: white;
+    text-align: center;
+    padding-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* stylet die Chart Hülle */
+.chartWrapper {
+    position: relative;
+    width: 280px;
+    height: 50px;
+    background: white;
+    left: 10px;
+}
+
+/* stylet den chart Inhalt */
+.chartWrapper .chart {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: gray;
+}
+
+/* stylet den chart text */
+#chartText {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    position: relative;
+    bottom: 0px;
+    left: 117px;
+}
+
+
+
