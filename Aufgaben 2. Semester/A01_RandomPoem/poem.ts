@@ -1,3 +1,4 @@
+namespace randompoem {
 let subjekt: string[] = ["Peter", "Hans", "Georg", "Gertrud", "Uschi", "Sabine"];
 let praedikat: string[] = ["isst", "baut", "fährt", "geht", "schneidet", "trinkt"];
 let objekt: string[] = ["Pferde", "Blumen", "Hunde", "Gebäude", "Brocken", "Kräuter"];
@@ -18,4 +19,5 @@ function getVerse(_subjekt: string[], _praedikat: string[], _objekt: string[]): 
 
     console.log(randomSubjekt + " " + randomPraedikat + " " + randomObjekt);
     return;
-} 
+}
+}
