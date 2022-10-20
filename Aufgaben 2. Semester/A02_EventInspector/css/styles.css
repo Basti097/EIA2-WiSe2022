@@ -1,0 +1,50 @@
+body {
+    background-color: black;
+}
+
+#span {  
+    color: white;
+    border: white;
+    border-style: groove;
+    left: 0px;
+    right: 0px;
+    width: 200px;
+    height: 20px;
+    padding-left: 10px;
+}
+h1 {
+    font-family: Helvetica;
+    margin-left: 98px;
+    color: white;
+}
+
+.outercontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: black solid;
+
+}
+
+.div0 {
+    display: flex;
+    height: 600px;
+    width: 600px;
+    border:black solid;
+    margin-right: 100px;
+    background-color: darkblue;
+    border-style: groove;
+    border-color: white;
+  
+}
+
+.div1 {
+    display: flex;
+    height: 600px;
+    width: 600px;
+    border: black solid;
+    background-color: darkblue;
+    border-style: groove;
+    border-color: white;
+    
+}

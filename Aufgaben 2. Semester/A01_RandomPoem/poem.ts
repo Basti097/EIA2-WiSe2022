@@ -26,9 +26,6 @@ namespace randompoem {
         let randomObjekt: string[] = objekt.splice(rNumberO, 1);
 
         console.log(randomSubjekt + " " + randomPraedikat + " " + randomObjekt);
-        console.log(subjekt);
-        console.log(praedikat);
-        console.log(objekt);
         return;
     }
 }

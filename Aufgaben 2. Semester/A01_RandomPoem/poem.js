@@ -21,9 +21,6 @@ var randompoem;
         let randomPraedikat = praedikat.splice(rNumberP, 1);
         let randomObjekt = objekt.splice(rNumberO, 1);
         console.log(randomSubjekt + " " + randomPraedikat + " " + randomObjekt);
-        console.log(subjekt);
-        console.log(praedikat);
-        console.log(objekt);
         return;
     }
 })(randompoem || (randompoem = {}));
