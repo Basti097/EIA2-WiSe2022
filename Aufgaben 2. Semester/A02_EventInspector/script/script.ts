@@ -1,3 +1,11 @@
+/*
+Aufgabe: L02 Event Inspector
+Name: Bastian Aberle
+Matrikel: 271166
+Datum: 21.10.2022
+Quellen: -
+*/
+
 namespace A02 {
 
     window.addEventListener("load", handleLoad);
@@ -29,7 +37,6 @@ namespace A02 {
         moveSpan.style.top = y + 10 + "px";
         let mouseTar: EventTarget = _event.target;
         
-
         // ->x, y + Target wird in den Span eingefügt<-
         document.querySelector("span").innerHTML = ("x: " + x + " y: " + y + " target: " + mouseTar);
     }
@@ -53,5 +60,4 @@ namespace A02 {
         if (ePath[5] == document) {
             console.log("abgefangenes DOM-Event: " + _event);
         }
-
 }}
