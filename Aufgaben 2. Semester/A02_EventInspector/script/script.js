@@ -1,7 +1,17 @@
+/*
+Aufgabe: L02 Event Inspector
+Name: Bastian Aberle
+Matrikel: 271166
+Datum: 21.10.2022
+Quellen: -
+*/
 var A02;
 (function (A02) {
     window.addEventListener("load", handleLoad);
-    //Event Listener für click, keyup und mousemove
+    // ->Event Listener für click, keyup und mousemove<-
+    //um in der Konsole nur eine Ausgabe jedes Events zu bekommen müsste man .but0,body,.div0/1 löschen, da mit 
+    //document.addEventListener bereits alle Elemente auf der Seite eingeschlossen sind, ich hab aber alle reingenommen weil es 
+    //explizit in der Aufgabe stand.
     function handleLoad() {
         document.addEventListener("click", logInfo);
         document.querySelector(".but0").addEventListener("click", clickedBut);
@@ -13,7 +23,7 @@ var A02;
         document.querySelector(".div1").addEventListener("keyup", logInfo);
         document.addEventListener("mousemove", setInfoBox);
     }
-    //bestimmung der x,y Koordinate der Maus, manipulation des Span Elements, bestimmung des targets 
+    // ->bestimmung der x,y Koordinate der Maus, manipulation des Span Elements, bestimmung des targets<-
     function setInfoBox(_event) {
         let x = _event.clientX;
         let y = _event.clientY;
@@ -22,10 +32,10 @@ var A02;
         moveSpan.style.left = x + 10 + "px";
         moveSpan.style.top = y + 10 + "px";
         let mouseTar = _event.target;
-        // x, y + Target wird in den Span eingefügt
+        // ->x, y + Target wird in den Span eingefügt<-
         document.querySelector("span").innerHTML = ("x: " + x + " y: " + y + " target: " + mouseTar);
     }
-    //event type, target, current target, event wird bestimmt und in der Konsole bei Klick ausgegeben
+    //->event type, target, current target, event wird bestimmt und in der Konsole bei Klick ausgegeben<-
     function logInfo(_event) {
         let eventType = _event.type;
         let event = _event;
@@ -36,7 +46,7 @@ var A02;
         console.log("Event: " + event);
         console.log("Event Type: " + eventType);
     }
-    //fängt DOM-Event ab und gibt es in der Konsole aus
+    //->fängt DOM-Event ab und gibt es in der Konsole aus<-
     function clickedBut(_event) {
         let ePath = _event.composedPath();
         if (ePath[5] == document) {
