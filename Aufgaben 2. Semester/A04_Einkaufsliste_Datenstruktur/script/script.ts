@@ -1,3 +1,11 @@
+/*
+Aufgabe: L04 Shopping List - Data
+Name: Bastian Aberle
+Matrikel: 271166
+Datum: 05.11.2022
+Quellen: EIA2 - Videos, W3Schools
+*/
+
 namespace shoppinglistA04 {
 
     //globale Variablen
