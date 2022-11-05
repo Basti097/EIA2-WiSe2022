@@ -1,3 +1,10 @@
+/*
+Aufgabe: L03 Shopping List
+Name: Bastian Aberle
+Matrikel: 271166
+Datum: 27.10.2022
+unter Zusammenarbeit mit: Lisa Blindenhöfer, Marie Walter
+*/
 namespace shoppinglist {
 
     window.addEventListener("load", handleList);
