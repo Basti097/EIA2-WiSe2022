@@ -3,19 +3,19 @@
 // Name: Bastian Aberle
 // Matrikel: 271166
 // Datum: 11.11.2022
-// Quellen: EIA2 - Videos, W3Schools
+// Quellen: EIA2 - Videos, W3Schools, Lisa Blindenhöfer
 // */
 var shoppinglistA05;
 (function (shoppinglistA05) {
     window.addEventListener("load", handleLoad);
     //lädt Liste und ruft loadData auf
     async function handleLoad() {
-        let button = document.querySelector("button[type=button]");
+        let button = document.querySelector("button[type=submit]");
         let response = await fetch("data.json");
         let entry = await response.text();
         let data = JSON.parse(entry);
         button.addEventListener("click", handleButton);
-        clearInputs();
+        // clearInputs();
         loadData(data);
     }
     //managed die Buttons
@@ -26,9 +26,20 @@ var shoppinglistA05;
     //client austausch
     async function sendData() {
         let formData = new FormData(document.forms[0]);
-        let query = new URLSearchParams(formData);
-        await fetch("shoppinglist.html?" + query.toString());
-        alert("Data sent");
+        let json = {};
+        //Umwandlung FormData in Json FormData
+        for (let key of formData.keys())
+            if (!json[key]) {
+                let values = formData.getAll(key);
+                json[key] = values.length > 1 ? values : values[0];
+            }
+        let query = new URLSearchParams();
+        query.set("command", "insert");
+        query.set("collection", "data");
+        query.set("data", JSON.stringify(json));
+        let response = await fetch("https://webuser.hs-furtwangen.de/~aberleba/Database/index.php?" + query.toString());
+        console.log(response);
+        console.log("data sent");
     }
     //lädt die Daten aus dem JSON Array in Variablen und gibt sie an loadItem weiter
     function loadData(data) {
@@ -58,7 +69,7 @@ var shoppinglistA05;
             purchase = " buy";
         }
         //löscht Value von Inputs
-        clearInputs();
+        // clearInputs();
         //generiere nun einen neuen Eintrag
         loadItem(item, amount, date, comment, purchase);
     }
@@ -105,13 +116,13 @@ var shoppinglistA05;
         deleteItem(newDiv);
     }
     //cleared die Input Felder
-    function clearInputs() {
-        let itemx = document.querySelector("input#inputx");
-        itemx.value = "";
-        let amountx = document.querySelector("input#amountx");
-        amountx.value = "";
-        let commentx = document.querySelector("input#commentx");
-        commentx.value = "";
-    }
+    // function clearInputs(): void {
+    //     let itemx: HTMLInputElement = document.querySelector("input#inputx");
+    //     itemx.value = "";
+    //     let amountx: HTMLInputElement = document.querySelector("input#amountx");
+    //     amountx.value = "";
+    //     let commentx: HTMLInputElement = document.querySelector("input#commentx");
+    //     commentx.value = "";
+    // }
 })(shoppinglistA05 || (shoppinglistA05 = {}));
 //# sourceMappingURL=script.js.map

@@ -19,14 +19,19 @@ namespace shoppinglistA05 {
         purchase: string;
     }
 
+    interface FormDataJSON {
+        [key: string]: FormDataEntryValue | FormDataEntryValue[];
+    }
+
+
     //lädt Liste und ruft loadData auf
     async function handleLoad(): Promise<void> {
-        let button: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=button]");
+        let button: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=submit]");
         let response: Response = await fetch("data.json");
         let entry: string = await response.text();
         let data: Input[] = JSON.parse(entry);
         button.addEventListener("click", handleButton);
-        clearInputs();
+        // clearInputs();
         loadData(data);
     }
 
@@ -39,9 +44,23 @@ namespace shoppinglistA05 {
     //client austausch
     async function sendData(): Promise<void> {
         let formData: FormData = new FormData(document.forms[0]);
-        let query: URLSearchParams = new URLSearchParams(<any>formData);
-        await fetch("shoppinglist.html?" + query.toString());
-        alert("Data sent");
+        let json: FormDataJSON = {};
+
+        //Umwandlung FormData in Json FormData
+        for (let key of formData.keys())
+        if (!json[key]) {
+            let values: FormDataEntryValue[] = formData.getAll(key);
+            json[key] = values.length > 1 ? values : values[0];
+        }
+
+
+        let query: URLSearchParams = new URLSearchParams();
+        query.set("command", "insert");
+        query.set("collection", "data");
+        query.set("data", JSON.stringify(json));    
+        let response: Response = await fetch("https://webuser.hs-furtwangen.de/~aberleba/Database/index.php?" + query.toString());
+        console.log(response);
+        console.log("data sent");
     }
 
     //lädt die Daten aus dem JSON Array in Variablen und gibt sie an loadItem weiter
@@ -75,7 +94,7 @@ namespace shoppinglistA05 {
         }
 
         //löscht Value von Inputs
-        clearInputs();
+        // clearInputs();
 
         //generiere nun einen neuen Eintrag
         loadItem(item, amount, date, comment, purchase);
@@ -133,12 +152,12 @@ namespace shoppinglistA05 {
     }
 
     //cleared die Input Felder
-    function clearInputs(): void {
-        let itemx: HTMLInputElement = document.querySelector("input#inputx");
-        itemx.value = "";
-        let amountx: HTMLInputElement = document.querySelector("input#amountx");
-        amountx.value = "";
-        let commentx: HTMLInputElement = document.querySelector("input#commentx");
-        commentx.value = "";
-    }
+    // function clearInputs(): void {
+    //     let itemx: HTMLInputElement = document.querySelector("input#inputx");
+    //     itemx.value = "";
+    //     let amountx: HTMLInputElement = document.querySelector("input#amountx");
+    //     amountx.value = "";
+    //     let commentx: HTMLInputElement = document.querySelector("input#commentx");
+    //     commentx.value = "";
+    // }
 }
