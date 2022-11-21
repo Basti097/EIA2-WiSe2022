@@ -2,31 +2,23 @@
 // Aufgabe: L06 Shopping List - Client
 // Name: Bastian Aberle
 // Matrikel: 271166
-// Datum: 11.11.2022
-// Quellen: EIA2 - Videos, W3Schools, Lisa Blindenhöfer
+// Datum: 20.11.2022
+// Quellen: EIA2 - Videos, W3Schools, Lisa Blindenhöfer, Cindy Nugyen
 // */
 var shoppinglistA06;
 (function (shoppinglistA06) {
+    //onload eventlistener
     window.addEventListener("load", handleLoad);
-    //interface für die Daten in der JSON File
-    let counter = 0;
-    let globalBol = false;
-    //lädt Liste und ruft loadData auf
+    //holt dateien vom server, ruft loadData auf
     async function handleLoad() {
         let button = document.querySelector("button[id=but1]");
         let response = await fetch("https://webuser.hs-furtwangen.de/~aberleba/Database/index.php/?command=find&collection=data");
         let entry = await response.text();
         let data = JSON.parse(entry);
-        button.addEventListener("click", handleButton);
+        button.addEventListener("click", sendData);
         loadData(data);
-        // clearInputs();
     }
-    //managed die Buttons
-    function handleButton() {
-        sendData();
-        loadInput();
-    }
-    //client austausch
+    //sendet den Eintrag auf den Server
     async function sendData() {
         let formData = new FormData(document.forms[0]);
         let json = {};
@@ -38,41 +30,34 @@ var shoppinglistA06;
             }
         let query = new URLSearchParams();
         let newJSON = JSON.stringify(json);
-        console.log(newJSON);
         query.set("command", "insert");
         query.set("collection", "data");
         query.set("data", newJSON);
-        // console.log(JSON.stringify(json));  
         let response = await fetch("https://webuser.hs-furtwangen.de/~aberleba/Database/index.php?" + query.toString());
-        // console.log(response);
         console.log("data sent");
+        loadInput();
     }
     //lädt die Daten aus dem JSON Array in Variablen und gibt sie an loadItem weiter
     function loadData(newData) {
         let list = [];
-        for (let test in newData.data) {
-            list.push(test);
+        for (let num in newData.data) {
+            list.push(num);
         }
         for (let index of list) {
-            console.log(newData.data[index].Item);
             let item = newData.data[index].Item;
             let amount = newData.data[index].Amount;
             let date = newData.data[index].NewDate.toString();
             let comment = newData.data[index].Area;
             let purchaseCheckbox = newData.data[index].Checkbox;
-            // console.log(purchaseCheckbox);
             let purchase;
             if (purchaseCheckbox == "on") {
                 purchase = " buy";
-                // console.log("purchase=" + purchase);
             }
             else {
                 purchase = "";
             }
             loadItem(item, amount, comment, purchase, date, index);
-            counter++;
         }
-        // loadData(newData);
     }
     //lädt den Input in den Feldern in Variablen und übergibt es dann zur loadItem Funktion
     function loadInput() {
@@ -93,8 +78,8 @@ var shoppinglistA06;
         }
         //generiere nun einen neuen Eintrag
         loadItem(item, amount, comment, purchase, date, index);
-        //löscht Value von Inputs
-        // clearInputs();
+        //refresh die seite um änderungen direkt an den server zu übertragen
+        window.open("./shoppinglist.html", "_self");
     }
     //Funktion zur generierung eines Item Felds im Output
     function loadItem(item, amount, comment, purchase, date, index) {
@@ -119,7 +104,7 @@ var shoppinglistA06;
         newCheckbox.id = "trash";
         newContainer.appendChild(newTrash);
         newEdit.addEventListener("click", function () {
-            editItem(newDiv, item, amount, comment, date, index);
+            editItem(newDiv, item, amount, comment, date, index, newCheckbox);
         });
         newTrash.addEventListener("click", function () {
             deleteItem(newDiv, index);
@@ -128,10 +113,11 @@ var shoppinglistA06;
             updateDate(newDiv, index, item, amount, comment, date, purchase);
         });
     }
+    //aktualisiert das Datum und erzeugt die Felder neu.
     async function updateDate(newDiv, index, item, amount, comment, date, purchase) {
         console.log("checkbox");
         var dateObj = new Date();
-        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+        var month = dateObj.getUTCMonth() + 1;
         var day = dateObj.getUTCDate();
         var year = dateObj.getUTCFullYear();
         var NewDate = year + "-" + month + "-" + day;
@@ -142,6 +128,7 @@ var shoppinglistA06;
         let newCheckbox = document.createElement("input");
         newCheckbox.type = "checkbox";
         newCheckbox.name = "Checkbox";
+        newCheckbox.checked = true;
         newContainer.appendChild(newCheckbox);
         let newEdit = document.createElement("div");
         newEdit.innerHTML = "<img id='edit' src='./pen-solid.svg'>";
@@ -151,7 +138,7 @@ var shoppinglistA06;
         newCheckbox.id = "trash";
         newContainer.appendChild(newTrash);
         newEdit.addEventListener("click", function () {
-            editItem(newDiv, item, amount, comment, date, index);
+            editItem(newDiv, item, amount, comment, date, index, newCheckbox);
         });
         newTrash.addEventListener("click", function () {
             deleteItem(newDiv, index);
@@ -165,9 +152,7 @@ var shoppinglistA06;
         query.set("command", "update");
         query.set("collection", "data");
         query.set("id", index);
-        console.log(index + "index");
         query.set("data", newJSON);
-        console.log(query);
         let response = await fetch("https://webuser.hs-furtwangen.de/~aberleba/Database/index.php?" + query.toString());
         console.log("data sent");
     }
@@ -182,7 +167,7 @@ var shoppinglistA06;
         console.log("deletet");
     }
     //editiert ein Item bei click auf edit
-    async function editItem(newDiv, item, amount, comment, date, index) {
+    async function editItem(newDiv, item, amount, comment, date, index, newCheckbox) {
         let itemx = document.querySelector("input#inputx");
         itemx.value = item;
         let amountx = document.querySelector("input#amountx");
@@ -192,15 +177,6 @@ var shoppinglistA06;
         let datex = document.querySelector("input#datex");
         datex.value = date;
         deleteItem(newDiv, index);
-    }
-    // cleared die Input Felder
-    function clearInputs() {
-        let itemx = document.querySelector("input#inputx");
-        itemx.value = "";
-        let amountx = document.querySelector("input#amountx");
-        amountx.value = "";
-        let commentx = document.querySelector("input#commentx");
-        commentx.value = "";
     }
 })(shoppinglistA06 || (shoppinglistA06 = {}));
 //# sourceMappingURL=script.js.map

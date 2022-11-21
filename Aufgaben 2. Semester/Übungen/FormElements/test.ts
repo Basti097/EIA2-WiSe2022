@@ -1,241 +1,257 @@
-// *
-// Aufgabe: L04 Shopping List - Data
-// Name: Bastian Aberle
-// Matrikel: 271166
-// Datum: 05.11.2022
-// Quellen: EIA2 - Videos, W3Schools
-// */
+// // *
+// // Aufgabe: L06 Shopping List - Client
+// // Name: Bastian Aberle
+// // Matrikel: 271166
+// // Datum: 20.11.2022
+// // Quellen: EIA2 - Videos, W3Schools, Lisa Blindenhöfer, Cindy Nugyen
+// // */
 
-// namespace shoppinglistA05 {
 
-//     //globale Variablen
-//     let item: string;
-//     let amount: number;
-//     let dateData: string;
-//     let comment: string;
-//     let nextPurchase: string;
-//     let amountItems: number = 0;
-//     let addToArray: boolean = false;
 
-//     //onload window Listener
-//     window.addEventListener("load", loadList);
+// namespace shoppinglistA010 {
 
-//     //lädt Liste und ruft loadData auf
-//     async function loadList(): Promise<void> {
-//         console.log("KJksjbfkjsb dfk");
-//         let response: Response = await fetch("data.json");
+//     //interfaces
+//     interface Item {
+//         Item: string;
+//         Amount: string;
+//         Checkbox: string;
+//         Area: string;
+//         NewDate: string;
+//     }
+
+//     interface FormDataJSON {
+//         [key: string]: FormDataEntryValue | FormDataEntryValue[];
+//     }
+
+//     interface Entrys {
+//         [category: string]: Item[];
+//     }
+
+//     //onload eventlistener
+//     window.addEventListener("load", handleLoad);
+
+//     //holt dateien vom server, ruft loadData auf
+//     async function handleLoad(): Promise<void> {
+//         let button: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[id=but1]");
+//         let response: Response = await fetch("https://webuser.hs-furtwangen.de/~aberleba/Database/index.php/?command=find&collection=data");
 //         let entry: string = await response.text();
-//         let savedInputs: Input[] = JSON.parse(entry);
-
-
-//         document.querySelector("button").addEventListener("click", loadInput);
-//         let submit: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=submit]");
-//         submit.addEventListener("click", sendSubmit);
-//         loadData();
-
-
+//         let data: Entrys = JSON.parse(entry);
+//         button.addEventListener("click", sendData);
+//         loadData(data);
 //     }
 
-//     async function sendSubmit(_event: Event): Promise<void> {
-//         console.log("submit");
+//     //sendet den Eintrag auf den Server
+//     async function sendData(): Promise<void> {
 //         let formData: FormData = new FormData(document.forms[0]);
-//         let query: URLSearchParams = new URLSearchParams(<any>formData);
-//         await fetch("shoppinglist.html?" + query.toString());
-//         alert("Order sent");
+//         let json: FormDataJSON = {};
 
+//         //Umwandlung FormData in Json FormData
+//         for (let key of formData.keys())
+//         if (!json[key]) {
+//             let values: FormDataEntryValue[] = formData.getAll(key);
+//             json[key] = values.length > 1 ? values : values[0];
+//         }
+    
+//         let query: URLSearchParams = new URLSearchParams();
+//         let newJSON: string = JSON.stringify(json);
 
+//         query.set("command", "insert");
+//         query.set("collection", "data");
+//         query.set("data", newJSON);  
+//         let response: Response = await fetch("https://webuser.hs-furtwangen.de/~aberleba/Database/index.php?" + query.toString());
+//         console.log("data sent");
+//         loadInput();
 //     }
-//     //lädt die Daten aus der data.ts in globale Variablen 
-//     function loadData(): void {
-//         for (let counter: number = 0; counter < savedInputs.length; counter++) {
-//             item = savedInputs[counter].savedItem;
-//             amount = savedInputs[counter].savedAmount;
-//             dateData = savedInputs[counter].savedDate;
-//             comment = savedInputs[counter].savedComment;
 
-//             //umwandlung nextPurchase von boolean in string
-//             let nextPurchaseString: string = savedInputs[counter].savedPurchase.toString();
-//             if (nextPurchaseString == "false") {
-//                 nextPurchase = "";
-//             } else {
-//                 nextPurchase = " buy";
-//             }
-//             //generiere nun einen neuen Eintrag in der Liste 
-//             loadItem();
+
+//     //lädt die Daten aus dem JSON Array in Variablen und gibt sie an loadItem weiter
+//     function loadData(newData: Entrys): void {
+    
+//         let list: any[] = [];
+//         for (let num in newData.data) {
+//             list.push(num);
 //         }
 
+//         for (let index of list) {
+//             let item: string = newData.data[index].Item;
+//             let amount: string = newData.data[index].Amount;
+//             let date: string = newData.data[index].NewDate.toString();
+//             let comment: string = newData.data[index].Area;
+//             let purchaseCheckbox: string = newData.data[index].Checkbox;
+
+//             let purchase: string;
+//             if (purchaseCheckbox == "on") {
+//                 purchase = " buy";
+
+//             } else {
+//                 purchase = "";
+//             }
+//             loadItem(item, amount, comment, purchase, date, index);
+//         }
 //     }
 
-//     //Funktion zum laden der Daten von den Input Feldern -> in globale Variablen 
+//     //lädt den Input in den Feldern in Variablen und übergibt es dann zur loadItem Funktion
 //     function loadInput(): void {
-//         addToArray = true;
 //         let formData: FormData = new FormData(document.forms[0]);
-
-//         item = formData.get("Item").toString();
-//         amount = Number(formData.get("Amount"));
-//         dateData = new Date().toLocaleDateString();
-//         comment = formData.get("Area").toString();
+//         let item: string = formData.get("Item").toString();
+//         let amount: string = formData.get("Amount").toString();
+//         let date: string = formData.get("NewDate").toString();
+//         let comment: string = formData.get("Area").toString();
+//         let index: any;
 
 //         //umwandlung nextPurchase von Input in string
-//         let nextPurchaseString: FormDataEntryValue = formData.get("Checkbox");
-
-//         if (nextPurchaseString == null) {
-//             nextPurchase = "";
+//         let purchaseCheckbox: FormDataEntryValue = formData.get("Checkbox");
+//         let purchase: string = "";
+//         if (purchaseCheckbox == null) {
+//             purchase = "";
 //         } else {
-//             nextPurchase = " buy";
+//             purchase = " buy";
 //         }
 //         //generiere nun einen neuen Eintrag
-//         loadItem();
-
+//         loadItem(item, amount, comment, purchase, date, index);
+//         //refresh die seite um änderungen direkt an den server zu übertragen
+//         window.open("./shoppinglist.html", "_self");
 //     }
 
-//     //Funktion zum Erstellen eines neuen Eintrags
-//     function loadItem(): void {
+//     //Funktion zur generierung eines Item Felds im Output
+//     function loadItem(item: string, amount: string, comment: string, purchase: string, date: string, index: any): void {
+//         let newDiv: HTMLDivElement = document.createElement("div");
+       
+//         newDiv.id = "createDiv";
+//         let parent: Element = document.querySelector("#output");
+//         newDiv.className = "genoutput";
+//         newDiv.innerHTML = date + " " + amount + " " + item + " " + comment + " " + purchase;
+     
+//         parent.appendChild(newDiv);
 
-//         //erstelle das div in dem das datum + anzahl + itemname + kommantar angezeigt wird 
-//         let newElement: HTMLDivElement = document.createElement("div");
-//         newElement.innerHTML = dateData + " " + amount + " " + item + " " + comment + " " + nextPurchase;
-//         let getElement: HTMLElement = document.querySelector("#output");
-//         getElement.appendChild(newElement);
-//         newElement.className = "outputItem" + amountItems;
-//         newElement.id = amountItems.toString();
-//         newElement.style.marginTop = "-10px";
+//         let newContainer: HTMLDivElement = document.createElement("div");
+//         newContainer.id = "containerIcons";
+//         newDiv.appendChild(newContainer);
 
-//         //erstelle neue Checkbox 
 //         let newCheckbox: HTMLInputElement = document.createElement("input");
 //         newCheckbox.type = "checkbox";
-//         newCheckbox.name = "CheckboxName" + amountItems;
-//         getElement = document.querySelector("#output");
-//         getElement.appendChild(newCheckbox);
-//         newCheckbox.className = "checkbox" + amountItems;
-//         newCheckbox.id = "checkbox" + amountItems.toString();
-//         newCheckbox.name = "Checkbox" + amountItems.toString();
-//         //stylet erzeugte Elemente
-//         newCheckbox.style.position = "relative";
-//         newCheckbox.style.left = "-85px";
-//         newCheckbox.style.top = "-14px";
+//         newCheckbox.name = "Checkbox";
+//         newContainer.appendChild(newCheckbox);
 
-
-//         //erstelle neues edit icon
 //         let newEdit: HTMLDivElement = document.createElement("div");
-//         newEdit.innerHTML = "<img id=" + amountItems + "e" + " src='./pen-solid.svg'>";
-//         getElement.appendChild(newEdit);
-//         newEdit.className = "edit" + amountItems;
-//         //stylet erzeugte Elemente
-//         newEdit.style.position = "relative";
-//         newEdit.style.top = "-35px";
-//         newEdit.style.width = "20px";
-//         newEdit.style.left = "165px";
+//         newEdit.innerHTML = "<img id='edit' src='./pen-solid.svg'>";
+//         newContainer.appendChild(newEdit);
 
-//         //erstelle neues trash icon
 //         let newTrash: HTMLDivElement = document.createElement("div");
-//         newTrash.innerHTML = "<img id='" + amountItems + "' " + "src='./trash-solid.svg'>";
-//         newElement.appendChild(newTrash);
-//         newTrash.className = "trash" + amountItems;
-//         //styled das erzeugte Element
-//         newTrash.style.width = "15px";
-//         newTrash.style.position = "relative";
-//         newTrash.style.left = "250px";
-//         newTrash.style.top = "7px";
+//         newTrash.innerHTML = "<img id='trash' src='./trash-solid.svg'>";
+//         newCheckbox.id = "trash";
+//         newContainer.appendChild(newTrash);
 
+//         newEdit.addEventListener("click", function (): void {
+//             editItem(newDiv, item, amount, comment, date, index, newCheckbox);
+//         });
 
-//         //bedingung zum hinzufügen des Items in das Objekt
-//         if (addToArray == true) {
-//             console.log("ist true");
-//             let savedItem = item;
-//             let savedAmount = amount;
-//             let savedComment = comment;
-//             let savedDate = dateData;
-//             let savedPurchase = true;
+//         newTrash.addEventListener("click", function (): void {
+//             deleteItem(newDiv, index);
+//         });
 
-
-//             let inputArray = { savedItem, savedAmount, savedComment, savedDate, savedPurchase };
-
-//             savedInputs.push(inputArray);
-//             console.log(savedInputs);
-//         }
-
-//         //listener
-//         document.querySelector(".trash" + amountItems).addEventListener("click", deleteItem);
-//         document.querySelector(".checkbox" + amountItems).addEventListener("click", checkboxNextPurchase);
-//         document.querySelector(".edit" + amountItems).addEventListener("click", editEntry);
-
-//         //zähle den Counter der Gesamtzahl der erzeugten Items um 1 hoch
-//         amountItems++;
+//         newCheckbox.addEventListener("click", function (): void {
+//             updateDate(newDiv, index, item, amount, comment, date, purchase);
+//         });
+        
 //     }
 
-//     //Funktion zum löschen eines Eintrags -> nimmt hier ID von dem jeweiligen Trash Element und löscht damit die zugehörigen Felder
-//     function deleteItem(_event: MouseEvent): void {
-//         console.log("delete");
-//         let x: string = (_event.target as Element).id;
-//         console.log(x);
-//         let newX: number = Number(x);
-//         let outputElementId: HTMLElement = document.getElementById(x);
-//         let editElementId: HTMLElement = document.getElementById(x + "e");
-//         let checkboxElementId: HTMLElement = document.getElementById("checkbox" + x);
-//         savedInputs.splice(newX, 1);
-//         console.log(savedInputs);
-//         checkboxElementId.remove();
-//         outputElementId.remove();
-//         editElementId.remove();
+//     async function updateDate(newDiv: HTMLDivElement, index: any, item: string, amount: string, comment: string, date: string, purchase: string): Promise<void> {
+//             console.log("checkbox");
+//             var dateObj: Date = new Date();
+//             var month: number = dateObj.getUTCMonth() + 1; //months from 1-12
+//             var day: number = dateObj.getUTCDate();
+//             var year: number = dateObj.getUTCFullYear();
+
+
+//             var NewDate: string = year + "-" + month + "-" + day;  
+           
+//             newDiv.innerHTML = NewDate + " " + amount + " " + item + " " + comment + " " + purchase;
+
+//             let newContainer: HTMLDivElement = document.createElement("div");
+//             newContainer.id = "containerIcons";
+//             newDiv.appendChild(newContainer);
+    
+//             let newCheckbox: HTMLInputElement = document.createElement("input");
+//             newCheckbox.type = "checkbox";
+//             newCheckbox.name = "Checkbox";
+//             newCheckbox.checked = true;
+//             newContainer.appendChild(newCheckbox);
+    
+//             let newEdit: HTMLDivElement = document.createElement("div");
+//             newEdit.innerHTML = "<img id='edit' src='./pen-solid.svg'>";
+//             newContainer.appendChild(newEdit);
+    
+//             let newTrash: HTMLDivElement = document.createElement("div");
+//             newTrash.innerHTML = "<img id='trash' src='./trash-solid.svg'>";
+//             newCheckbox.id = "trash";
+//             newContainer.appendChild(newTrash);
+    
+//             newEdit.addEventListener("click", function (): void {
+//                 editItem(newDiv, item, amount, comment, date, index, newCheckbox);
+//             });
+    
+//             newTrash.addEventListener("click", function (): void {
+//                 deleteItem(newDiv, index);
+//             });
+    
+//             newCheckbox.addEventListener("click", function (): void {
+//                 updateDate(newDiv, index, item, amount, comment, date, purchase);
+//             });
+//             let json: FormDataJSON = {NewDate};
+//             let newJSON: string = JSON.stringify(json);
+            
+//             let query: URLSearchParams = new URLSearchParams();
+//             query.set("command", "update");
+//             query.set("collection", "data");
+//             query.set("id", index);
+   
+//             query.set("data", newJSON   );
+
+        
+//             let response: Response = await fetch("https://webuser.hs-furtwangen.de/~aberleba/Database/index.php?" + query.toString());
+//             console.log("data sent");
 
 //     }
 
-//     //Funktion zum überprüfen ob etwas gekauft wurde oder nicht (für die checkbox unten) <- Funktioniert noch nicht richtig (boxen verziehen sich)
-//     function checkboxNextPurchase(_event: MouseEvent): void {
-//         console.log("Checkbox Liste: Click -> checkboxNextPurchase()");
-//         // let formData: FormData = new FormData(document.forms[0]);
-//         // let x: string = (_event.target as Element).id;
-//         // x = x.slice(8, 9);
-//         // let newX: number = Number(x);
-//         // item = savedInputs[newX].savedItem;
-//         // amount = savedInputs[newX].savedAmount;
-//         // dateData = savedInputs[newX].savedDate;
-//         // comment = savedInputs[newX].savedComment;
+//     //löscht ein Item bei click auf trash
+//     async function deleteItem(newDiv: HTMLDivElement, index: any): Promise<void> {
+//         newDiv.parentElement.removeChild(newDiv);
+//         let query: URLSearchParams = new URLSearchParams();
+       
+      
+//         query.set("command", "delete");
+//         query.set("collection", "data");
+//         query.set("id", index.toString());  
 
-//         // let checkStatus: FormDataEntryValue = formData.get("Checkbox" + newX);
+//         let response: Response = await fetch("https://webuser.hs-furtwangen.de/~aberleba/Database/index.php?" + query.toString());
 
-//         // if (checkStatus == null) {
-//         //     document.querySelector(".outputItem" + newX).innerHTML = dateData + " " + amount + " " + item + " " + comment + " " + "buy";
-//         // } else {
-//         //     document.querySelector(".outputItem" + newX).innerHTML = dateData + " " + amount + " " + item + " " + comment;
-//         // }
-
-
-
-
+//         console.log("deletet");
 
 //     }
 
-//     //Funktion zum editieren von Einträgen
-//     function editEntry(_event: MouseEvent): void {
-//         console.log("Edit click -> editEntry()");
-//         let formData: FormData = new FormData(document.forms[0]);
-//         let x: string = (_event.target as Element).id;
-//         x = x.slice(0, 1);
+//     //editiert ein Item bei click auf edit
+//     async function editItem(newDiv: HTMLDivElement, item: string, amount: string, comment: string, date: string, index: any, newCheckbox: HTMLInputElement): Promise<void> {
+//         let itemx: HTMLInputElement = document.querySelector("input#inputx");
+//         itemx.value = item;
+//         let amountx: HTMLInputElement = document.querySelector("input#amountx");
+//         amountx.value = amount.toString();
+//         let commentx: HTMLInputElement = document.querySelector("input#commentx");
+//         commentx.value = comment;
+//         let datex: Element = document.querySelector("input#datex");
+//         datex.value = date;
+      
+        
+//         deleteItem(newDiv, index); 
+//     }
 
-//         let newX: number = Number(x);
-//         console.log("newX:" + newX);
-
-//         item = savedInputs[newX].savedItem;
-//         amount = savedInputs[newX].savedAmount;
-//         dateData = savedInputs[newX].savedDate;
-//         comment = savedInputs[newX].savedComment;
-
-//         document.getElementById("inputx").value = item;
-//         document.getElementById("amountx").value = amount;
-//         document.getElementById("commentx").value = comment;
-
-//         //delete entry from list 
-//         let outputElementId: HTMLElement = document.getElementById(newX);
-//         let editElementId: HTMLElement = document.getElementById(newX + "e");
-//         let checkboxElementId: HTMLElement = document.getElementById("checkbox" + newX);
-
-//         checkboxElementId.remove();
-//         outputElementId.remove();
-//         editElementId.remove();
-//         savedInputs.splice(newX, 1);
-//         console.log(savedInputs);
-
+//     // cleared die Input Felder
+//     function clearInputs(): void {
+//         let itemx: HTMLInputElement = document.querySelector("input#inputx");
+//         itemx.value = "";
+//         let amountx: HTMLInputElement = document.querySelector("input#amountx");
+//         amountx.value = "";
+//         let commentx: HTMLInputElement = document.querySelector("input#commentx");
+//         commentx.value = "";
 //     }
 // }

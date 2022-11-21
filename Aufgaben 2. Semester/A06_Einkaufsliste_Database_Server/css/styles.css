@@ -173,6 +173,11 @@ input[type=checkbox] {
 
 }
 
+.date {
+    width: 150px;
+    color: gray;
+}
+
 
 
 
