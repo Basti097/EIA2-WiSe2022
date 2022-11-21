@@ -1,5 +1,5 @@
 // *
-// Aufgabe: L06 Shopping List - Client
+// Aufgabe: L06 Shopping List - Server
 // Name: Bastian Aberle
 // Matrikel: 271166
 // Datum: 20.11.2022
