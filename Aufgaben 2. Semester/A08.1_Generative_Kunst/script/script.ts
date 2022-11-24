@@ -143,7 +143,7 @@ namespace A07 {
         canvas.height = window.innerHeight;
         let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        loadColor(ctx);
+        loadColor(ctx); 
     }
 }
 
