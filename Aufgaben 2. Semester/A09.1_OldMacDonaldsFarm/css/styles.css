@@ -1,0 +1,66 @@
+#div {
+  
+    position: relative;
+    left: 30px;
+    top: 10px;
+}
+
+#output {
+    margin-right: auto;
+    margin-left: auto;
+    background-color: white;
+    position: relative;
+    top: 25px;
+    border-radius: 10px;
+    width: 325px;
+
+}
+
+body {
+    font-family: Helvetica;
+    background-color: lightgray;
+
+}
+
+#eat1, #eat2, #eat3, #eat4, #eat5 {
+    position: relative;
+    left: 30px;
+    color: gray;
+}
+
+#day {
+    margin-right: auto;
+    margin-left: auto;
+  
+    width: 60px;
+    height: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+#dayDiv {
+    position: relative;
+    top: 3px;
+    left: 9px;
+
+}
+
+#foodStats {
+    margin-right: auto;
+    margin-left: auto;
+    background-color: white;
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    top: 10px;
+}
+
+#newStat {
+    position: relative;
+    left: 10px;
+    top: 7px;
+}
+
+
+

@@ -1,3 +1,10 @@
+// *
+// Aufgabe: L08.2 Landscape
+// Name: Bastian Aberle
+// Matrikel: 271166
+// Datum: 03.12.2022
+// Quellen: EIA2 - Videos, W3Schools, Lisa Blindenhöfer, Arthur Aguiar
+// */
 var A082;
 (function (A082) {
     window.addEventListener("load", handleLoad);
