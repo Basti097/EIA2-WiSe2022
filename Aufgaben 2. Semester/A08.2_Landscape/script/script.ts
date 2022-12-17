@@ -7,7 +7,7 @@
 // */
 
 namespace A082 {
-    interface Vector {
+    interface VectorBackground {
         x: number;
         y: number;
     }
@@ -25,11 +25,11 @@ namespace A082 {
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
         let horizon: number = crc2.canvas.height * golden;
-        let posMountains: Vector = { x: 0, y: horizon };
-        let posSnowmanBot: Vector = { x: 200, y: 590 };
-        let posSnowmanMid: Vector = { x: 200, y: 525 };
-        let posSnowmanTop: Vector = { x: 200, y: 470 };
-        let posCage: Vector = { x: 500, y: 500 };
+        let posMountains: VectorBackground = { x: 0, y: horizon };
+        let posSnowmanBot: VectorBackground = { x: 200, y: 590 };
+        let posSnowmanMid: VectorBackground = { x: 200, y: 525 };
+        let posSnowmanTop: VectorBackground = { x: 200, y: 470 };
+        let posCage: VectorBackground = { x: 500, y: 500 };
         drawBackground();
         drawSun({ x: 100, y: 75 });
         drawCloud({ x: 500, y: 125 }, { x: 250, y: 75 });
@@ -39,7 +39,6 @@ namespace A082 {
         drawSnowman(posSnowmanBot, posSnowmanMid, posSnowmanTop);
         drawBirdCage(posCage);
         drawBird();
-        drawSnow();
         drawBirds();
     }
 
@@ -69,7 +68,7 @@ namespace A082 {
         }
     }
 
-    function drawTrees(_position: Vector): void {
+    function drawTrees(_position: VectorBackground): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
         for (let index: number = 0; index < 7; index++) {
             let randomX: number = Math.random() * (canvas.width - 1) + 1;
@@ -119,23 +118,7 @@ namespace A082 {
 
     }
 
-    function drawSnow(): void {
-        let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
-        for (let index: number = 0; index < 100; index++) {
-            let randomX: number = Math.random() * (canvas.width - 1) + 1;
-            let randomY: number = Math.random() * (canvas.height - 1) + 1;
-            crc2.save();
-            crc2.shadowBlur = 2;
-            crc2.shadowColor = "lightgray";
-            crc2.translate(randomX, randomY);
-            crc2.beginPath();
-            crc2.arc(0, 0, 3, 0, 2 * Math.PI);
-            crc2.fillStyle = "white";
-            crc2.fill();
-            crc2.closePath();
-            crc2.restore();
-        }
-    }
+
 
     function drawBird(): void {
         //kopf
@@ -244,7 +227,7 @@ namespace A082 {
 
 
 
-    function drawBirdCage(_position: Vector): void {
+    function drawBirdCage(_position: VectorBackground): void {
         crc2.save();
         crc2.shadowBlur = 2;
         crc2.shadowColor = "black";
@@ -299,7 +282,7 @@ namespace A082 {
 
     }
 
-    function drawSnowman(_positionBot: Vector, _positionMid: Vector, _positionTop: Vector): void {
+    function drawSnowman(_positionBot: VectorBackground, _positionMid: VectorBackground, _positionTop: VectorBackground): void {
         let r1: number = 50;
         let r2: number = 40;
         let r3: number = 30;
@@ -434,7 +417,7 @@ namespace A082 {
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
     }
 
-    function drawSun(_position: Vector): void {
+    function drawSun(_position: VectorBackground): void {
         console.log("Sun", _position);
 
         let r1: number = 30;
@@ -453,7 +436,7 @@ namespace A082 {
     }
 
 
-    function drawCloud(_position: Vector, _size: Vector): void {
+    function drawCloud(_position: VectorBackground, _size: VectorBackground): void {
         console.log("Cloud", _position, _size);
 
         let nParticles: number = 80;
@@ -482,7 +465,7 @@ namespace A082 {
 
 
 
-    function drawMountains(_position: Vector, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
+    function drawMountains(_position: VectorBackground, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
         console.log("Mountains", _position, _min, _max);
         let stepMin: number = 50;
         let stepMax: number = 150;
