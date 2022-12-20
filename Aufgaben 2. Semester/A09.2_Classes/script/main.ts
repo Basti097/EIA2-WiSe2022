@@ -1,3 +1,11 @@
+// *
+// Aufgabe: L09.2 Classes
+// Name: Bastian Aberle
+// Matrikel: 271166
+// Datum: 20.12.2022
+// Quellen: Konzepte (mit Lisa zusammen gemacht), Lisa Blindenhöfer, EIA Videos, W3Schools
+// */
+
 namespace A092 {
     window.addEventListener("load", handleLoad);
     export let crc2: CanvasRenderingContext2D;
@@ -54,7 +62,7 @@ namespace A092 {
             snowflake.draw();
         }
         for (let bird of birds) {
-            bird.move(1/ 50);
+            bird.move(1 / 50);
             bird.draw();
         }
     }    
