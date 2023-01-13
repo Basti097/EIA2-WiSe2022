@@ -75,8 +75,8 @@ namespace A092 {
         }
 
         set(_x: number, _y: number): void {
-            this.x = randomNum2;
-            this.y = randomNum;
+            // this.x = randomNum2;
+            // this.y = randomNum;
         }
 
         scale(_factor: number): void {

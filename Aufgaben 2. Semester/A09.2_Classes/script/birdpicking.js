@@ -4,7 +4,7 @@ var A092;
         velocity;
         size;
         constructor(_size) {
-            this.velocity = new VectorPicking(0, 0);
+            this.velocity = new A092.VectorPicking(0, 0);
             this.velocity.random(0, 400);
         }
         draw() {

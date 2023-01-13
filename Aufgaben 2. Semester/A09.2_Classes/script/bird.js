@@ -1,10 +1,11 @@
 var A092;
 (function (A092) {
-    class Bird {
+    class Bird extends Moveable {
         pos;
         velocity;
         size;
         constructor(_size) {
+            super(_position);
             this.pos = new A092.VectorBird(0, 0);
             this.velocity = new A092.VectorBird(0, 0);
             this.velocity.random(0, 400);

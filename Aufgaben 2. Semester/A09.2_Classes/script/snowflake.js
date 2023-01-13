@@ -23,7 +23,6 @@ var A092;
             A092.crc2.restore();
         }
         move(_timeslice) {
-            let randomNum = Math.random() * (800 - 1) + 1;
             console.log("move");
             let offset = new A092.Vector(this.velocity.x, this.velocity.y);
             offset.scale(_timeslice);

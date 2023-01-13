@@ -1,12 +1,14 @@
 namespace A092 {
 
-    export class Bird {
+    export class Bird extends Moveable {
 
         pos: VectorBird;
         velocity: VectorBird;
         size: number;
 
         constructor(_size: number) {
+            
+            super(_position);
             this.pos = new VectorBird(0,0);
             this.velocity = new VectorBird(0,0);
             this.velocity.random(0, 400);

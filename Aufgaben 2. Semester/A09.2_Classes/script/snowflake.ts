@@ -29,13 +29,13 @@ namespace A092 {
         }
 
         move(_timeslice: number): void {
-            let randomNum: number = Math.random() * (800 - 1) + 1;
+
             console.log("move");
     
 
             let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
             offset.scale(_timeslice);
-            this.pos.add(offset);
+            this.pos.add(offset); 
 
             if (this.pos.x < 0)
                 this.pos.x += crc2.canvas.width;
