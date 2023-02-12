@@ -87,6 +87,7 @@ namespace shoppinglistA05 {
         //umwandlung nextPurchase von Input in string
         let purchaseCheckbox: FormDataEntryValue = formData.get("Checkbox");
         let purchase: string = "";
+        console.log(purchaseCheckbox);
         if (purchaseCheckbox == null) {
             purchase = "";
         } else {

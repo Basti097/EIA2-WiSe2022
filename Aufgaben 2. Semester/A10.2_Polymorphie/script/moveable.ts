@@ -1,5 +1,5 @@
 namespace A102 {
-    export class Moveable {
+    export  class Moveable {
         position: Vector;
         velocity: Vector;
 

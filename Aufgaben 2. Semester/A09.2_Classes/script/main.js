@@ -29,7 +29,7 @@ var A092;
             snowflakes.push(snowflake);
         }
         for (let index2 = 0; index2 < 20; index2++) {
-            let bird = new A092.Bird(200);
+            let bird = new Bird(200);
             birds.push(bird);
         }
     }

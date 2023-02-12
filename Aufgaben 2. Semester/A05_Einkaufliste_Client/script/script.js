@@ -62,6 +62,7 @@ var shoppinglistA05;
         //umwandlung nextPurchase von Input in string
         let purchaseCheckbox = formData.get("Checkbox");
         let purchase = "";
+        console.log(purchaseCheckbox);
         if (purchaseCheckbox == null) {
             purchase = "";
         }
